@@ -1,54 +1,32 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { createSelector, createStructuredSelector } from 'reselect';
-import { PageHeader, Table, Result, Button } from 'antd';
+import { createStructuredSelector } from 'reselect';
+import { PageHeader, Result, Button, Spin, Typography } from 'antd';
 
-import { Employee } from 'types/employee';
-import { columns } from './constants';
 import { State } from 'store/state';
 import {
-    employeesOrderSelector,
-    employeesByIdSelector,
     employeesLoadingSelector,
     employeesErrorSelector,
 } from 'store/selectors/employees';
 import { fetchEmployees } from 'store/actions/employees';
 
-type TableRow = Omit<Employee, 'id'> & { key: string };
-type TableRowKey = number | string;
+import { Table } from 'components/Table';
+
+import './styles.css';
 
 type PageStateProps = {
-    data: TableRow[];
     loading: boolean;
     error: boolean;
 };
 type PageDispatchProps = typeof mapDispatchToProps;
 type PageProps = PageStateProps & PageDispatchProps;
 
-const getCheckboxProps = (record: TableRow) => ({
-    name: record.name,
-});
+const { Text } = Typography;
 
-const PageComponent = ({ data, loading, error, getData }: PageProps) => {
-    const [selected, setSelected] = React.useState<TableRow[]>([]);
-
+const PageComponent = ({ loading, error, getData }: PageProps) => {
     React.useEffect(() => {
         getData();
     }, [getData]);
-
-    const onChange = React.useCallback(
-        (_: TableRowKey[], selectedRows: TableRow[]) => {
-            setSelected(selectedRows);
-        },
-        [setSelected],
-    );
-
-    const renderSummary = React.useCallback(
-        () =>
-            'Пользователи: ' +
-            (selected.map(({ name }) => name).join(', ') || '≧☉_☉≦'),
-        [selected],
-    );
 
     return (
         <main className="page">
@@ -67,38 +45,25 @@ const PageComponent = ({ data, loading, error, getData }: PageProps) => {
                         ]}
                     ></Result>
                 )}
-
-                <Table
-                    dataSource={data}
-                    columns={columns}
-                    rowSelection={{
-                        type: 'checkbox',
-                        onChange,
-                        getCheckboxProps,
-                    }}
-                    footer={renderSummary}
-                    loading={loading}
-                    pagination={false}
-                    scroll={{ x: 400, y: 600 }}
-                />
+                {loading && (
+                    <div className="page__loading">
+                        <div className="page__message">
+                            <Text>Данные загружаются</Text>
+                            <br />
+                            <Text type="secondary">
+                                Пожалуйста сохраняйте спокойствие (ᵔᴥᵔ)
+                            </Text>
+                        </div>
+                        <Spin />
+                    </div>
+                )}
+                {!loading && !error && <Table />}
             </section>
         </main>
     );
 };
 
 const mapStateToProps = createStructuredSelector<State, PageStateProps>({
-    data: createSelector(
-        employeesOrderSelector,
-        employeesByIdSelector,
-        (order, map) =>
-            order.map((id) => {
-                const item: TableRow = {
-                    ...map[id],
-                    key: id,
-                };
-                return item;
-            }),
-    ),
     loading: employeesLoadingSelector,
     error: employeesErrorSelector,
 });

@@ -1,0 +1,23 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.page__table {
+    max-width: 100%;
+    overflow: auto;
+}
+
+.page__loading {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.page__message {
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
