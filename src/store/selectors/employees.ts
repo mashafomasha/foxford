@@ -13,12 +13,12 @@ export const employeesOrderSelector = createSelector(
     ({ order }) => order,
 );
 
-export const employeesLoading = createSelector(
+export const employeesLoadingSelector = createSelector(
     employeesSelector,
     ({ loading }) => loading,
 );
 
-export const employeesError = createSelector(
+export const employeesErrorSelector = createSelector(
     employeesSelector,
     ({ error }) => error,
 );

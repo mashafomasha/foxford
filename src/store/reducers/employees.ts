@@ -18,11 +18,23 @@ export const employeesReducer = createReducer(initialState)
         ...state,
         error,
     }))
-    .handleAction(setData, (state, { payload: { data } }) => ({
+    .handleAction(setData, (state, { payload: { results } }) => ({
         ...state,
-        order: data.map(({ id }) => id),
-        itemById: data.reduce((acc, employee) => {
-            acc[employee.id] = employee;
+        order: results.map(({ login: { uuid: id } }) => id),
+        itemById: results.reduce((acc, employee) => {
+            const {
+                name: { first: name, last: surname },
+                login: { uuid: id },
+                dob: { age },
+            } = employee;
+
+            acc[id] = {
+                name,
+                surname,
+                id,
+                age,
+            };
+
             return acc;
         }, {} as EmployeesState['itemById']),
     }));

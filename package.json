@@ -41,6 +41,7 @@
         "jest-environment-jsdom-fourteen": "1.0.1",
         "jest-resolve": "24.9.0",
         "jest-watch-typeahead": "0.4.2",
+        "ky": "^0.24.0",
         "mini-css-extract-plugin": "0.9.0",
         "optimize-css-assets-webpack-plugin": "5.0.3",
         "pnp-webpack-plugin": "1.6.4",
@@ -142,7 +143,8 @@
             "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy",
             "^components/(.*)$": "<rootDir>/src/components/$1",
             "^store/(.*)$": "<rootDir>/src/store/$1",
-            "^types/(.*)$": "<rootDir>/src/types/$1"
+            "^types/(.*)$": "<rootDir>/src/types/$1",
+            "^api/(.*)$": "<rootDir>/src/api/$1"
         },
         "moduleFileExtensions": [
             "web.js",
