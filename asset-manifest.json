@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/foxford/static/css/main.5ecd60fb.chunk.css",
+    "main.js": "/foxford/static/js/main.8e3a3920.chunk.js",
+    "main.js.map": "/foxford/static/js/main.8e3a3920.chunk.js.map",
+    "runtime-main.js": "/foxford/static/js/runtime-main.630dbe5a.js",
+    "runtime-main.js.map": "/foxford/static/js/runtime-main.630dbe5a.js.map",
+    "static/css/2.220ccb42.chunk.css": "/foxford/static/css/2.220ccb42.chunk.css",
+    "static/js/2.a53c502a.chunk.js": "/foxford/static/js/2.a53c502a.chunk.js",
+    "static/js/2.a53c502a.chunk.js.map": "/foxford/static/js/2.a53c502a.chunk.js.map",
+    "index.html": "/foxford/index.html",
+    "precache-manifest.5e5bf425370bd77e11085dac38277ad4.js": "/foxford/precache-manifest.5e5bf425370bd77e11085dac38277ad4.js",
+    "service-worker.js": "/foxford/service-worker.js",
+    "static/css/2.220ccb42.chunk.css.map": "/foxford/static/css/2.220ccb42.chunk.css.map",
+    "static/css/main.5ecd60fb.chunk.css.map": "/foxford/static/css/main.5ecd60fb.chunk.css.map",
+    "static/js/2.a53c502a.chunk.js.LICENSE.txt": "/foxford/static/js/2.a53c502a.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.630dbe5a.js",
+    "static/css/2.220ccb42.chunk.css",
+    "static/js/2.a53c502a.chunk.js",
+    "static/css/main.5ecd60fb.chunk.css",
+    "static/js/main.8e3a3920.chunk.js"
+  ]
+}
