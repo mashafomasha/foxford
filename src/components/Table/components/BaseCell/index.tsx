@@ -9,12 +9,10 @@ type BaseCellProps = React.DetailedHTMLProps<
     className?: string;
 };
 
-export const BaseCell = ({
-    children,
-    className,
-    ...tdProps
-}: BaseCellProps) => (
-    <td className={cn('table__cell', className)} {...tdProps}>
-        {children}
-    </td>
+export const BaseCell = React.memo(
+    ({ children, className, ...tdProps }: BaseCellProps) => (
+        <td className={cn('table__cell', className)} {...tdProps}>
+            {children}
+        </td>
+    ),
 );

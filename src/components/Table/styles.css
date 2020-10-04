@@ -9,9 +9,20 @@
     position: relative;
 }
 
+.table__row {
+    transition: background 0.3s;
+}
+
+.table__row:hover {
+    background: #fafafa;
+}
+
+.table__row_selected {
+    background-color: #e6f7ff;
+}
+
 .table__cell {
     border-bottom: 1px solid #f0f0f0;
-    transition: background 0.3s;
     padding: 16px;
     overflow-wrap: break-word;
     box-sizing: border-box;
@@ -35,10 +46,6 @@
 .table__cell:first-child {
     width: 135px;
     text-align: center;
-}
-
-.table__row:hover {
-    background: #fafafa;
 }
 
 .table__cell_summary {

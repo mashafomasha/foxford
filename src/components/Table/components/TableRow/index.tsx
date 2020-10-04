@@ -2,6 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { createSelector, createStructuredSelector } from 'reselect';
 import { Checkbox } from 'antd';
+import cn from 'classnames';
 
 import { Employee } from 'types/employee';
 import { State } from 'store/state';
@@ -26,7 +27,7 @@ const TableRowComponent = ({
     rowData,
     checked,
 }: TableRowProps) => (
-    <BaseRow>
+    <BaseRow className={cn({ table__row_selected: checked })}>
         <BaseCell>
             <Checkbox
                 checked={checked}

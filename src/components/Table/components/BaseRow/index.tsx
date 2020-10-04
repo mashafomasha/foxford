@@ -9,8 +9,10 @@ type BaseRowProps = React.DetailedHTMLProps<
     className?: string;
 };
 
-export const BaseRow = ({ children, className, ...trProps }: BaseRowProps) => (
-    <tr className={cn('table__row', className)} {...trProps}>
-        {children}
-    </tr>
+export const BaseRow = React.memo(
+    ({ children, className, ...trProps }: BaseRowProps) => (
+        <tr className={cn('table__row', className)} {...trProps}>
+            {children}
+        </tr>
+    ),
 );
