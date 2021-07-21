@@ -1,21 +1,15 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import { useQueryClient } from 'react-query';
 
-import { employeesOrderSelector } from 'store/selectors/employees';
-import { State } from 'store/state';
-
-import { columns, TableColumn } from './columns';
+import { columns as columnsOrder } from './columns';
 import { TableRow, HeaderRow, SummaryRow, everyRowId } from './components';
 
 import './styles.css';
 
-type TableProps = {
-    columnsOrder: TableColumn[];
-    rowsOrder: string[];
-};
-
-const TableComponent = ({ columnsOrder, rowsOrder }: TableProps) => {
+export const Table = () => {
+    const queryClient = useQueryClient();
+    const { order: rowsOrder = [] } = (queryClient.getQueryData('employees') ||
+        {}) as any;
     const [selected, setSelected] = React.useState<string[]>([]);
 
     const handleClick = (event: React.MouseEvent) => {
@@ -63,7 +57,7 @@ const TableComponent = ({ columnsOrder, rowsOrder }: TableProps) => {
                 />
             </thead>
             <tbody>
-                {rowsOrder.map((rowId) => (
+                {rowsOrder.map((rowId: string) => (
                     <TableRow
                         key={rowId}
                         rowId={rowId}
@@ -78,9 +72,3 @@ const TableComponent = ({ columnsOrder, rowsOrder }: TableProps) => {
         </table>
     );
 };
-
-const mapStateToProps = createStructuredSelector<State, TableProps>({
-    columnsOrder: () => columns,
-    rowsOrder: employeesOrderSelector,
-});
-export const Table = connect(mapStateToProps)(TableComponent);

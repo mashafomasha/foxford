@@ -17,9 +17,30 @@ export type GetEmployeesResult = {
 };
 
 export const getEmployees = async () => {
-    const parsed: GetEmployeesResult = await ky
+    const { results }: GetEmployeesResult = await ky
         .get(`${employeesApiURL}?inc=dob,name,login&results=50`)
         .json();
 
-    return parsed;
+    const order = results.map(({ login: { uuid: id } }) => id);
+    const itemById = results.reduce((acc, employee) => {
+        const {
+            name: { first: name, last: surname },
+            login: { uuid: id },
+            dob: { age },
+        } = employee;
+
+        acc[id] = {
+            name,
+            surname,
+            id,
+            age,
+        };
+
+        return acc;
+    }, {} as any);
+
+    return {
+        order,
+        itemById,
+    };
 };
