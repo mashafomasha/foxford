@@ -1,26 +1,25 @@
-import { createStore, applyMiddleware } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
+import { applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension/logOnly';
 import createSagaMiddleware from 'redux-saga';
 
-import { rootReducer } from './reducers';
+import employeesReducer from './slices/employees';
 import { employeesSaga } from './sagas/employees';
 
-let store: ReturnType<typeof configureStore> | undefined;
+const sagaMiddleware = createSagaMiddleware();
+const composeEnhancers = composeWithDevTools({});
+
+let store = configureStore({
+    reducer: {
+        employees: employeesReducer,
+    },
+    enhancers: [composeEnhancers(applyMiddleware(sagaMiddleware))],
+});
+
+sagaMiddleware.run(employeesSaga);
 
 export const getStore = () => store;
 
-export const configureStore = () => {
-    const sagaMiddleware = createSagaMiddleware();
-    const composeEnhancers = composeWithDevTools({});
+export type RootState = ReturnType<typeof store.getState>;
 
-    const resultStore = createStore(
-        rootReducer,
-        composeEnhancers(applyMiddleware(sagaMiddleware)),
-    );
-
-    sagaMiddleware.run(employeesSaga);
-
-    store = resultStore;
-
-    return resultStore;
-};
+export type AppDispatch = typeof store.dispatch;

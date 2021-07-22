@@ -8,7 +8,7 @@ import {
     employeesLoadingSelector,
     employeesErrorSelector,
 } from 'store/selectors/employees';
-import { fetchEmployees } from 'store/actions/employees';
+import { fetchEmployees } from 'store/slices/employees';
 
 import { Table } from 'components/Table';
 

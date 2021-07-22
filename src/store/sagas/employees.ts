@@ -6,7 +6,7 @@ import {
     toggleLoading,
     toggleError,
     setData,
-} from 'store/actions/employees';
+} from 'store/slices/employees';
 
 function* fetch(action: ReturnType<typeof fetchEmployees>) {
     try {
